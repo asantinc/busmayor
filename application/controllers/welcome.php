@@ -1,7 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-
+	function __construct(){
+	    parent::__construct();
+	    $this->load->library('session');
+	    $this->load->helper('form');
+	    $this->load->helper('url');
+	}
+	
 	/**
 	 * Index Page for this controller.
 	 *
@@ -19,15 +25,34 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('header');
-		$this->load->view('inicio');
-		$this->load->view('footer');
-		
+		$this->render('inicio');
 	}
 	
-	
-	
-	
+	 function render($view, $data = array()){
+	    $data['page'] = $view;
+	    $this->load->view('header', $data);
+	    $this->load->view($view, $data);
+	    $this->load->view('footer', $data);
+	 }
+	 
+	 public function agricultura(){
+	 	 $this->render('agricultura');
+	 }
+	 
+	 public function ganaderia(){
+	 	 $this->render('ganaderia');
+	 }
+	 
+	 public function contacto(){
+	 	 $this->render('contacto');
+	 }
+	 
+	 
+	 public function galeria(){
+	 	 $this->render('galeria');
+	 }
+	 
+	 
 }
 
 /* End of file welcome.php */
